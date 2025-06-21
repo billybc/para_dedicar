@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Carta de Amor Digital</title>
+  <style>
+    body {
+      background: linear-gradient(120deg, #ffdde1 0%, #ee9ca7 100%);
+      font-family: 'Segoe Script', cursive;
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .carta {
+      background: #fff0f6;
+      border-radius: 20px;
+      box-shadow: 0 4px 32px rgba(255, 94, 98, 0.2);
+      padding: 2.5rem 2.2rem 2rem 2.2rem;
+      max-width: 420px;
+      text-align: center;
+      position: relative;
+      animation: aparecer 1.3s ease;
+    }
+    @keyframes aparecer {
+      from { opacity: 0; transform: translateY(-60px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .corazon {
+      color: #ff5e62;
+      font-size: 3rem;
+      animation: latir 1s infinite;
+      margin-bottom: 1rem;
+    }
+    @keyframes latir {
+      0%, 100% { transform: scale(1);}
+      10%, 30%, 50%, 70%, 90% { transform: scale(1.2);}
+      20%, 40%, 60%, 80% { transform: scale(1);}
+    }
+    h1 {
+      font-size: 2rem;
+      margin: 0.5rem 0 1rem 0;
+      color: #d72660;
+      letter-spacing: 1px;
+    }
+    .mensaje {
+      font-size: 1.1rem;
+      color: #4e0037;
+      margin-bottom: 1.5rem;
+      white-space: pre-line;
+    }
+    button {
+      background: linear-gradient(90deg, #ff5e62, #ff9966);
+      border: none;
+      color: white;
+      padding: 0.7rem 2rem;
+      border-radius: 30px;
+      font-size: 1rem;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.3s;
+      box-shadow: 0 2px 10px rgba(255, 94, 98, 0.08);
+    }
+    button:hover {
+      background: linear-gradient(90deg, #ff9966, #ff5e62);
+    }
+    .sorpresa {
+      display: none;
+      margin-top: 2rem;
+      font-size: 1.8rem;
+      color: #ff5e62;
+      animation: aparecer 1s;
+    }
+    .brillo {
+      animation: brillo 2s infinite;
+    }
+    @keyframes brillo {
+      0%, 100% { filter: brightness(1);}
+      50% { filter: brightness(1.5);}
+    }
+    .music-btn {
+      position: fixed;
+      top: 20px;
+      right: 24px;
+      z-index: 100;
+      background: #fff6;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-size: 1.5rem;
+      color: #d72660;
+      box-shadow: 0 2px 10px #ffbfc445;
+      cursor: pointer;
+      outline: none;
+      transition: background 0.2s;
+    }
+    .music-btn:hover {
+      background: #fff9;
+    }
+  </style>
+</head>
+<body>
+  <!-- Música de fondo: Enlace DIRECTO de Vocaroo -->
+  <audio id="bgmusic" autoplay loop>
+    <source src="https://media1.vocaroo.com/mp3/1lQLy1cifQbW" type="audio/mp3">
+    Tu navegador no soporta audio HTML5.
+  </audio>
+  <!-- Botón opcional para pausar/reanudar -->
+  <button class="music-btn" id="musicBtn" title="Música"><span id="musicIcon">🔊</span></button>
+  <div class="carta">
+    <div class="corazon" id="corazon">❤️</div>
+    <h1>Para Ti, mi Amor</h1>
+    <div class="mensaje" id="mensaje">
+      Hola hermosa,<br>
+      Esta no es solo una carta digital, es un pequeño rincón programado con todo mi cariño solo para ti.<br><br>
+      Si pudiera escribirte en cualquier lenguaje, siempre elegiría el código de tu sonrisa.<br>
+      Eres mi variable favorita, mi bucle infinito de felicidad y el motivo de cada uno de mis “console.log(‘te quiero’);”.<br><br>
+      Gracias por ser la magia en cada una de mis líneas de vida.<br>
+      Haz clic en el botón y sonríe 💖
+    </div>
+    <button onclick="mostrarSorpresa()">Ver Sorpresa</button>
+    <div class="sorpresa" id="sorpresa">✨ Eres el algoritmo más perfecto de mi corazón. Nunca dejes de sonreír. ✨</div>
+  </div>
+  <script>
+    // Corazón animado
+    document.getElementById('corazon').onclick = function() {
+      this.classList.toggle('brillo');
+    };
+
+    function mostrarSorpresa() {
+      const sorpresa = document.getElementById('sorpresa');
+      sorpresa.style.display = 'block';
+      setTimeout(() => {
+        sorpresa.innerText += " 💕";
+      }, 1200);
+    }
+
+    // Control de música
+    const audio = document.getElementById('bgmusic');
+    const musicBtn = document.getElementById('musicBtn');
+    const musicIcon = document.getElementById('musicIcon');
+    function updateIcon() {
+      musicIcon.textContent = audio.paused ? "🔈" : "🔊";
+    }
+    musicBtn.onclick = function() {
+      if(audio.paused) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
+      updateIcon();
+    };
+    audio.onplay = audio.onpause = updateIcon;
+
+    // Autoplay para móviles
+    function enableAutoMusic() {
+      audio.play().catch(()=>{});
+      document.removeEventListener('click', enableAutoMusic);
+      document.removeEventListener('touchstart', enableAutoMusic);
+      document.removeEventListener('keydown', enableAutoMusic);
+    }
+    document.addEventListener('click', enableAutoMusic);
+    document.addEventListener('touchstart', enableAutoMusic);
+    document.addEventListener('keydown', enableAutoMusic);
+  </script>
+</body>
+</html>
