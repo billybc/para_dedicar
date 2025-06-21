@@ -106,7 +106,7 @@
 <body>
   <!-- Música de fondo: Enlace DIRECTO de Vocaroo -->
   <audio id="bgmusic" autoplay loop>
-    <source src="https://media1.vocaroo.com/mp3/1lQLy1cifQbW" type="audio/mp3">
+    <source src="https://raw.githubusercontent.com/billybc/para_dedicar/main/audio.mp3" type="audio/mp3">
     Tu navegador no soporta audio HTML5.
   </audio>
   <!-- Botón opcional para pausar/reanudar -->
